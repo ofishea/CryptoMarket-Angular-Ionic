@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border d-md-none" [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed>
+ <ion-row class="ion-justify-content-center">
+ <div class="contain col-lg-10 col-md-10">
+
+  <div class="seg-holder">
+   <ion-segment mode="ios">
+      <ion-segment-button>
+        <ion-label>Crypto Market</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div class="the-content">
+    <ion-searchbar type="text" placeholder="Search a Coin" (keyup)="searchCoin()" [(ngModel)]="searchText" animated="true"></ion-searchbar>
+    <div class="watchlist" *ngFor="let coin of filteredCoints; let i = index">
+      <ion-item lines="none">
+        <div class="thumb flex al-center jc-center" slot="start">
+          <img [src]="coin.image" alt="{{ coin.name }}">
+        </div>
+        <ion-label>
+          <h2 class="text-uppercase">{{ coin.symbol }}</h2>
+          <div class="status flex al-center" >
+             <div [ngClass]="
+             coin.price_change_percentage_24h > 0
+               ? 'text-success'
+               : 'text-danger'
+           "
+         >
+           <h5>{{ coin.price_change_percentage_24h.toLocaleString() }}</h5>
+           </div>
+           </div>
+        </ion-label>
+        <div class="end-slot2" slot="end">
+          <h2>USD {{ coin.current_price.toLocaleString() }}</h2>
+          <h5>{{ coin.name }}</h5>
+      </div>
+      </ion-item>
+    </div>
+  </div>
+      </div>
+        </ion-row>
+        </ion-grid>
+</ion-content>
